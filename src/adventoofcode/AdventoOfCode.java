@@ -24,7 +24,7 @@ public class AdventoOfCode {
      */
     public static void main(String[] args) throws IOException {
 
-        muestraContenido("/Users/chapis/Documents/input.txt");
+        muestraContenido("/Users/chapis/Documents/inputPartDos.txt");
     }
 
     public static void muestraContenido(String archivo) throws FileNotFoundException, IOException {
@@ -34,11 +34,17 @@ public class AdventoOfCode {
         while ((cadena = b.readLine()) != null) {
             String[] parts = cadena.split("");
             int floor = 0;
+            int pos=0;
             for (int i = 0; i < parts.length; i++) {
                 if (parts[i].equals("(")) {
                     floor += 1;
                 } else {
+                    pos=i + 1;
                     floor -= 1;
+                    if(floor == -1){
+                        System.out.println("posicion "+ pos);
+                        break;
+                    }
                 }
             }
             System.out.println("El resultado final es " + floor);
