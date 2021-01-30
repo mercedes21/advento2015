@@ -44,6 +44,6 @@ public class AdventoDiaDos {
             int total = suma + suma2;
             x += total;
         }
-        System.out.println("El total de pies es " + x);
+        System.out.println("El total de pies es: " + x);
     }
 }
