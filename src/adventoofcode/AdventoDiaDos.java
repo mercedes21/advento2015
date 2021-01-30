@@ -9,7 +9,9 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.Collections;
 
 /**
  *
@@ -28,42 +30,20 @@ public class AdventoDiaDos {
         String medidas;
         FileReader f = new FileReader(archivo);
         BufferedReader b = new BufferedReader(f);
-        int suma = 0;
-        int sumaMenor = 0;
-        int total = 0;
+        int x = 0;
         while ((medidas = b.readLine()) != null) {
-            String[] separador = medidas.split("x");
-            int l = Integer.parseInt(separador[0]);
-            int w = Integer.parseInt(separador[1]);
-            int h = Integer.parseInt(separador[2]);
-            int largo = l * w;
-            int ancho = w * h;
-            int alto = h * l;
-            int menor = 0;
-
-            if (largo < ancho && largo < alto) {
-                menor = largo;
-            } else if (ancho < largo && ancho < alto) {
-                menor = ancho;
-            } else if (alto < largo && alto < ancho) {
-                menor = alto;
-            } else if (largo == ancho && ancho < alto || largo == ancho && alto < ancho || largo == ancho && largo < alto || largo == ancho && ancho < largo || largo == ancho && largo < ancho) {
-                menor = ancho;
-            } else if (alto == ancho && ancho < alto || alto == ancho && alto < ancho || alto == ancho && largo < alto || alto == ancho && ancho < largo || alto == ancho && largo < ancho) {
-                menor = alto;
-            } else if (largo == alto && ancho < alto || largo == alto && alto < ancho || largo == alto && largo < alto || largo == alto && ancho < largo || largo == alto && largo < ancho) {
-                menor = largo;
-            } else if (largo == ancho || largo == alto || ancho == largo || ancho == alto) {
-                menor = largo;
-            } else {
-            }
-            int largof = largo * 2;
-            int anchof = ancho * 2;
-            int altof = alto * 2;
-            sumaMenor += menor;
-            suma += largof + anchof + altof;
+            int[] a = Arrays.stream(medidas.split("x")).mapToInt(Integer::parseInt).toArray();
+            Arrays.sort(a);
+            int c1 = a[0];
+            int c2 = a[1];
+            int c3 = a[2];
+            int lado1 = a[0] * 2;
+            int lado2 = a[1] * 2;
+            int suma = lado1 + lado2;
+            int suma2 = c1 * c2 * c3;
+            int total = suma + suma2;
+            x += total;
         }
-        total = sumaMenor + suma;
-        System.out.println("total  " + total);
+        System.out.println("El total de pies es " + x);
     }
 }
